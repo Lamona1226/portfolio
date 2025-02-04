@@ -19,7 +19,7 @@ This project is a personal portfolio website built using HTML, CSS, and JavaScri
 
 📸 Preview
 
-    Add a screenshot or GIF of your portfolio here.
+![Image](https://github.com/user-attachments/assets/ef7e1325-c92a-4f8e-81b3-2be501463b0f)
 
 🚀 Getting Started
 🔹 Clone the Repository
