@@ -296,19 +296,19 @@ span {color:var(--main-color);}
 /* Cycling through different job titles */
 @keyframes words {
     0%, 20% {
-        content: "Penetration Tester (Junior)";
+        content: "Junior Penetration Testing";
     }
     21%, 40% {
-        content: "Cybersecurity Engineer";
+        content: "Ream Team";
     }
     41%, 60% {
         content: "Network Security Engineer"; 
     }
     61%, 80% {
-        content: "Security Operations Center (SOC) Analyst";
+        content: "Ethical Hacking";
     }
     81%, 100% {
-        content: "Information Security Engineer";
+        content: "Data Analysis";
     }
 }
 
