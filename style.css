@@ -302,13 +302,13 @@ span {color:var(--main-color);}
         content: "Cybersecurity Enthusiast";
     }
     41%, 60% {
-        content: "Network Security Engineer"; 
+        content: "CyberSecurity Engineer"; 
     }
     61%, 80% {
-        content: "Ethical Hacking";
+        content: "Ethical Hacker";
     }
     81%, 100% {
-        content: "Data Analysis";
+        content: "Data Analyst";
     }
 }
 
