@@ -1,4 +1,5 @@
 
+let filterTimeout = null;
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 let sections = document.querySelectorAll('section');
@@ -8,9 +9,13 @@ let projectCards = document.querySelectorAll('.project-box');
 let filterStatus = document.querySelector('#filter-status');
 const contactForm = document.querySelector('#contact-form');
 const contactStatus = document.querySelector('#contact-status');
+const project5Img = document.querySelector('#project5-img');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/aymanahmed20122001@gmail.com';
-const CONTACT_POST_ENDPOINT = 'https://formsubmit.co/aymanahmed20122001@gmail.com';
+// FormSubmit token: after your first form submission activates your account,
+// go to https://formsubmit.co and retrieve your unique token.
+// Replace YOUR_FORMSUBMIT_TOKEN with that token to obfuscate your email address.
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/ef4a0761b9cd7b3fcc011b10e652c1ab';
+const CONTACT_POST_ENDPOINT = 'https://formsubmit.co/ef4a0761b9cd7b3fcc011b10e652c1ab';
 const heroTypingTarget = document.querySelector('.text-animation span');
 const HERO_TITLES = [
     'Ethical Hacker',
@@ -21,34 +26,52 @@ const HERO_TITLES = [
 ];
 
 document.body.classList.add('js-enabled');
-setProjectCardStagger(projectCards);
 startHeroTypingLoop();
 
-// Highlight active section in navigation bar
-window.onscroll = () => {
-    sections.forEach(sec => {
-        let top = window.scrollY;
-        let offset = sec.offsetTop - 150; // Adjust offset for better accuracy
-        let height = sec.offsetHeight;
-        let id = sec.getAttribute('id');
+if (project5Img) {
+    project5Img.addEventListener('error', () => {
+        project5Img.style.display = 'none';
+    }, { once: true });
+}
 
-        if (top >= offset && top < offset + height) {
-            navLinks.forEach(links => {
-                links.classList.remove('active');
-                const activeLink = document.querySelector('header nav a[href*=' + id + ']');
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-            });
+// Highlight active section in navigation bar
+const navLinkMap = new Map();
+navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href?.startsWith('#')) {
+        navLinkMap.set(href.slice(1), link);
+    }
+});
+
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = navLinkMap.get(entry.target.id);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         }
     });
-};
+}, { rootMargin: '-10% 0px -85% 0px', threshold: 0 });
+
+sections.forEach(section => navObserver.observe(section));
+
+requestAnimationFrame(() => {
+    const alreadyActive = Array.from(navLinks).some(
+        link => link.classList.contains('active')
+    );
+    if (!alreadyActive) {
+        const firstLink = navLinkMap.get(sections[0]?.id);
+        if (firstLink) firstLink.classList.add('active');
+    }
+});
 
 // Toggle mobile menu
-menuIcon.onclick = () => {
+menuIcon.addEventListener('click', () => {
     menuIcon.classList.toggle('bx-x');
     navbar.classList.toggle('active');
-};
+});
 
 // Close mobile menu after navigation click
 navLinks.forEach(link => {
@@ -73,6 +96,14 @@ filterButtons.forEach(button => {
 });
 
 function applyProjectFilter(filter) {
+    if (filterTimeout) {
+        clearTimeout(filterTimeout);
+        filterTimeout = null;
+        projectCards.forEach(card => {
+            card.classList.remove('is-filtering-out', 'is-filtering-in');
+        });
+    }
+
     const visibleCards = [];
     const label = getFilterLabel(filter);
 
@@ -94,7 +125,7 @@ function applyProjectFilter(filter) {
         card.classList.add('is-filtering-out');
     });
 
-    setTimeout(() => {
+    filterTimeout = setTimeout(() => {
         let staggerIndex = 0;
         projectCards.forEach(card => {
             const category = card.dataset.category;
@@ -118,6 +149,7 @@ function applyProjectFilter(filter) {
         });
 
         announceFilterResults(visibleCards.length, label);
+        filterTimeout = null;
     }, 180);
 }
 
@@ -176,10 +208,19 @@ if (!prefersReducedMotion) {
     projectCards.forEach(card => card.classList.add('project-visible'));
 }
 
+let lastSubmissionTime = 0;
+const SUBMISSION_COOLDOWN_MS = 30000;
+
 if (contactForm) {
     contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         clearFormStatus();
+
+        const now = Date.now();
+        if (now - lastSubmissionTime < SUBMISSION_COOLDOWN_MS) {
+            setFormStatus('Please wait 30 seconds before sending another message.', 'error');
+            return;
+        }
 
         const formData = new FormData(contactForm);
         const websiteTrap = String(formData.get('website') || '').trim();
@@ -202,6 +243,8 @@ if (contactForm) {
             return;
         }
 
+        lastSubmissionTime = now;
+
         // `file://` pages commonly fail CORS for AJAX requests.
         if (window.location.protocol === 'file:') {
             submitViaFormPost(payload);
@@ -218,7 +261,7 @@ if (contactForm) {
                     _subject: `Portfolio Contact: ${payload.subject}`,
                     _template: 'table',
                     _replyto: payload.email,
-                    _captcha: 'false'
+                    _captcha: 'true'
                 })
             });
 
@@ -241,8 +284,8 @@ if (contactForm) {
             contactForm.reset();
         } catch (error) {
             submitViaFormPost(payload);
-            const details = error && error.message ? ` (${error.message})` : '';
-            setFormStatus(`AJAX delivery failed, using secure fallback${details}. Please complete submission in the opened tab.`, 'error');
+            console.error('[ContactForm] AJAX submission failed:', error);
+            setFormStatus('Message delivery encountered an issue. Please try the direct email link in the footer.', 'error');
         }
     });
 }
@@ -254,18 +297,20 @@ function setProjectCardStagger(cards) {
 }
 
 function sanitizeFormPayload(payload) {
-    const sanitizeText = (value) =>
-        String(value || '')
-            .replace(/[<>{}]/g, '')
-            .replace(/[\u0000-\u001F\u007F]/g, '')
+    const sanitizeText = (value, maxLen = 500) =>
+        String(value ?? '')
+            .slice(0, maxLen)
+            .replace(/[<>"'`{}\\]/g, '')
+            .replace(/javascript\s*:/gi, '')
+            .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
             .trim();
 
     return {
-        name: sanitizeText(payload.name),
-        email: sanitizeText(payload.email).toLowerCase(),
-        phone: sanitizeText(payload.phone),
-        subject: sanitizeText(payload.subject),
-        message: sanitizeText(payload.message)
+        name: sanitizeText(payload.name, 80),
+        email: sanitizeText(payload.email, 120).toLowerCase(),
+        phone: sanitizeText(payload.phone, 25),
+        subject: sanitizeText(payload.subject, 120),
+        message: sanitizeText(payload.message, 2000)
     };
 }
 
@@ -306,7 +351,7 @@ function submitViaFormPost(payload) {
         message: payload.message,
         _subject: `Portfolio Contact: ${payload.subject}`,
         _template: 'table',
-        _captcha: 'false',
+        _captcha: 'true',
         _replyto: payload.email
     };
 
@@ -341,6 +386,7 @@ function startHeroTypingLoop() {
     const nextTitleDelay = 250;
 
     const tick = () => {
+        if (!document.body.contains(heroTypingTarget)) return;
         const currentTitle = HERO_TITLES[titleIndex];
 
         if (!isDeleting) {
