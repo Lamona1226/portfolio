@@ -715,7 +715,7 @@ textarea:focus-visible {
 }
 
 .project-filters {
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1.2rem;
@@ -729,7 +729,7 @@ textarea:focus-visible {
     backdrop-filter: blur(10px);
     background: linear-gradient(180deg, rgba(19, 19, 19, 0.92), rgba(19, 19, 19, 0.72));
     border-radius: 1.6rem;
-    width: auto;
+    width: max-content;
     max-width: 100%;
 }
 
@@ -1152,9 +1152,9 @@ margin-top: 2rem;
                         grid-template-columns: 1fr;
                     }
                     .project-filters {
-                        display: flex;
-                        justify-content: flex-start;
-                        width: 100%;
+                        justify-content: center;
+                        width: max-content;
+                        max-width: 100%;
                         top: 8.6rem;
                     }
                     .text-animation {
