@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' https://unpkg.com; script-src 'self'; connect-src 'self' https://formsubmit.co; font-src 'self' https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co;">
+    <meta name="description" content="Ayman Azzam's Responsive Portfolio Website">
+    <meta name="keywords" content="portfolio, web development, Ayman Azzam">
+    <meta name="author" content="Ayman Azzam">
+    <title>Ayman Azzam's Portfolio Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+</head> 
+<body>
+    <header class="header">
+        <a href="#home" class="logo">Ayman <span>Azzam</span></a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#Skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+<!-- Home Section -->
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Hi, It's <span>Ayman</span></h1>
+            <h3 class="text-animation">I'm a <span></span></h3>
+            <p>I help organizations identify security weaknesses before attackers do. I specialize in practical penetration testing, vulnerability assessment, and secure system thinking. My approach combines technical depth with clear communication, so teams understand not just what is vulnerable, but how to fix it and reduce future risk.</p>
+            
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/ayman-ahmed-b752101a5/"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/Lamona1226"><i class='bx bxl-github'></i></a>
+                <a href="https://www.instagram.com/aymanazzam._/"><i class='bx bxl-instagram-alt'></i></a>
+               
+            </div>
+
+            <div class="btn-group">
+                <a href="#contact" class="btn cta-emphasis">Hire</a>
+                <a href="#contact" class="btn">Contact</a>
+            </div>
+        </div>
+
+        <div class="home-img">
+            <img src="image.jpg" alt="Ayman Azzam's Profile Picture">
+        </div>
+    </section>
+
+        <!-- Skills Section -->
+        <section class="Skills" id="Skills">
+            <h2 class="heading">Skills</h2> 
+        
+            <div class="Skills-container">
+                <div class="Skills-box">
+                    <div class="Skills-info">
+                        <h4>Python</h4>
+                        <p> Skilled in cybersecurity scripting, including keyloggers, port scanning, and exploit development. Proficient in Scapy, Socket, and PyAutoGUI for network and system security tasks.</p>
+                    </div>
+                </div>
+        
+                <div class="Skills-box">
+                    <div class="Skills-info">
+                        <h4>Linux</h4> 
+                        <p>Proficient in Linux for data processing, scripting, and system management. Skilled in command-line tools and shell scripting for automation. Comfortable managing servers and optimizing workflows.</p>
+                    </div>
+                </div>
+        
+                <div class="Skills-box">
+                    <div class="Skills-info">
+                        <h4>EXCEL</h4> 
+                        <p>Expert in Excel for data analysis, reporting, and visualization. Proficient in advanced functions, pivot tables, and macros. Experienced in creating dynamic dashboards and automating tasks for efficiency.</p>
+                    </div>
+                </div>
+        
+                <div class="Skills-box">
+                    <div class="Skills-info">
+                        <h4>Problem-solving Challenges</h4> 
+                        <p>Enjoy problem-solving challenges like Capture
+                            the Flag </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="heading">Projects</h2>
+        <p class="projects-intro">
+            A curated portfolio of technical work across secure web development, software engineering, and cybersecurity assessments.
+        </p>
+
+        <article class="featured-project">
+            <div class="featured-content">
+                <span class="featured-label">Featured Project</span>
+                <h3>Port Scanner + WAF Detection Toolkit</h3>
+                <p>
+                    A modular reconnaissance toolkit designed to simulate real penetration testing workflows. It combines port scanning, WAF detection, and Censys integration to speed up discovery and improve technical decision-making during security assessments.
+                </p>
+                <div class="featured-links">
+                    <a href="https://github.com/Lamona1226/portlamgang" class="btn cta-emphasis">View Featured Project</a>
+                    <a href="https://github.com/Lamona1226" class="btn btn-outline">More on GitHub</a>
+                </div>
+            </div>
+            <div class="featured-stats" aria-label="Featured project highlights">
+                <p><strong>Category:</strong> Software Application / Security Tooling</p>
+                <p><strong>Focus:</strong> Enumeration, detection, and actionable analysis</p>
+                <p><strong>Primary Stack:</strong> Python, networking modules, Censys API</p>
+            </div>
+        </article>
+
+        <div class="project-filters" role="tablist" aria-label="Project category filters">
+            <button class="filter-btn active" data-filter="all" type="button" role="tab" aria-selected="true">All Projects</button>
+            <button class="filter-btn" data-filter="web" type="button" role="tab" aria-selected="false">Web Development</button>
+            <button class="filter-btn" data-filter="software" type="button" role="tab" aria-selected="false">Software Applications</button>
+            <button class="filter-btn" data-filter="pentest" type="button" role="tab" aria-selected="false">Penetration Testing</button>
+        </div>
+
+        <p id="filter-status" class="sr-only" aria-live="polite">Showing all projects.</p>
+
+        <div class="projects-container">
+            <article class="project-box" data-category="web">
+                <img src="project4.jpg" alt="IoT Smart Home Application">
+                <div class="project-info">
+                    <span class="project-tag">Web Development</span>
+                    <h4>IoT Smart Home Application</h4>
+                    <p>Designed and tested a smart home network and web application workflow to evaluate LAN performance, latency, and reliability under real-world usage conditions.</p>
+                    <a href="https://github.com/Lamona1226/IOT-SMART-HOME-APPLICATION" class="btn">View Project</a>
+                </div>
+            </article>
+
+            <article class="project-box" data-category="software">
+                <img src="project2.jpg" alt="Port Scanner and WAF Detection Toolkit">
+                <div class="project-info">
+                    <span class="project-tag">Software Application</span>
+                    <h4>Port Scanner + WAF Detection Toolkit</h4>
+                    <p>Built a modular Python reconnaissance tool that performs port scanning, identifies web application firewalls, and integrates Censys data for deeper target visibility.</p>
+                    <a href="https://github.com/Lamona1226/portlamgang" class="btn">View Project</a>
+                </div>
+            </article>
+
+            <article class="project-box" data-category="software">
+                <img src="project3.jpg" alt="NIST Based Cybersecurity Architecture">
+                <div class="project-info">
+                    <span class="project-tag">Software Application</span>
+                    <h4>NIST-Based Cybersecurity Architecture</h4>
+                    <p>Produced a risk-based security architecture aligned with NIST CSF 2.0, including controls, governance priorities, and implementation planning for a university environment.</p>
+                    <a href="https://github.com/Lamona1226/Cybersecurity-Design-for-the-British-University-in-Egypt" class="btn">View Project</a>
+                </div>
+            </article>
+
+            <article class="project-box" data-category="pentest">
+                <img src="project1.jpg" alt="Keylogger Proof of Concept">
+                <div class="project-info">
+                    <span class="project-tag">Penetration Testing</span>
+                    <h4>Keylogger Proof of Concept</h4>
+                    <p>Developed a controlled proof of concept to demonstrate endpoint monitoring risks and data exfiltration pathways, then documented defensive controls and detection opportunities.</p>
+                    <a href="https://github.com/Lamona1226/keylogger" class="btn">View Project</a>
+                </div>
+            </article>
+
+            <article class="project-box" data-category="pentest">
+                <img src="project2.jpg" alt="Vulnerability Discovery and Analysis">
+                <div class="project-info">
+                    <span class="project-tag">Vulnerability Assessment</span>
+                    <h4>Vulnerability Discovery and Analysis</h4>
+                    <p>Executed structured enumeration and vulnerability assessment workflows to identify weak points, validate impact, and provide practical remediation guidance.</p>
+                    <a href="https://github.com/Lamona1226" class="btn">View More Work</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+       
+        <form id="contact-form" novalidate>
+             <div class="input-group">
+                   <div class="input-box">
+                        <input type="text" id="name" name="name" placeholder="Full Name" autocomplete="name" required maxlength="80">
+                                 <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" required maxlength="120">
+                     </div> 
+        <div class="input-box">
+                     <input type="tel" id="phone" name="phone" placeholder="Phone Number" autocomplete="tel" maxlength="25" pattern="[0-9+()\-\s]{7,25}">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required maxlength="120">
+         </div>
+                </div>
+        <div class="input-group-2">
+        <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" required maxlength="2000"></textarea>
+        <input type="text" name="website" id="website" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="submit" value="Send Message" class="btn cta-emphasis">
+        <p id="contact-status" class="form-status" aria-live="polite"></p>
+        </div>
+        </form>
+        </section>
+        <footer class="footer">
+            <div class="social">
+                <a href="https://www.linkedin.com/in/ayman-ahmed-b752101a5/"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/Lamona1226"><i class='bx bxl-github'></i></a>
+                <a href="https://www.instagram.com/aymanazzam._/"><i class='bx bxl-instagram-alt'></i></a>
+                <a href="https://tryhackme.com/p/aymanahmed201220"><i class='bx bx-cube'></i></a>
+            </div>
+            <!-- Add Email and Phone Number -->
+    <div class="contact-info">
+        <p>
+            <i class='bx bx-envelope'></i> <!-- Email icon -->
+            <a href="mailto:aymanahmed20122001@gmail.com">aymanahmed20122001@gmail.com</a> <!-- Replace with your email -->
+        </p>
+        <p>
+            <i class='bx bx-phone'></i> <!-- Phone icon -->
+            <a href="tel:+201024624311">+201024624311</a> <!-- Replace with your phone number -->
+        </p>
+    </div>
+            <ul class="list">
+               
+               
+                <li>
+                <a href="#home">About me </a>
+                </li>
+                <li>
+                <a href="#contact">Contact</a>
+                </li>
+                
+                </ul>
+                <p class="copyright">
+                    @ Ayman Azzam | All Rights Reserved
+                    </p>
+            </footer> 
+
+    <script src="script.js"></script>
+</body>
+</html>
