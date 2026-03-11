@@ -34,12 +34,21 @@
 html {
     font-size: 60%; /* Set base font size for rem units */
     overflow-x: hidden; /* Hide horizontal overflow */
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
     background: var(--bg-color); /* Set body background */
     color: var(--text-color); /* Set default text color */
     line-height: 1.6;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 body::before {
@@ -62,6 +71,7 @@ body::before {
     width: 100%;
     padding: 4rem 12% 4rem; /* Add padding */
     background: rgba(0, 0, 0, 0.45); /* Semi-transparent background */
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px); /* Add blur effect */
     border-bottom: 1px solid rgba(0, 255, 238, 0.15);
     display: flex;
@@ -138,7 +148,7 @@ span {color:var(--main-color);}
     color:var(--main-color);
 }
 .home-content h1 {
-    font-size: 7rem; /* Large heading */
+    font-size: clamp(4rem, 8vw, 7rem); /* Large heading */
     font-weight: 700; /* Bold font */
     margin-top: 1.5rem;
     line-height: 1; /* Tight line spacing */
@@ -327,6 +337,12 @@ textarea:focus-visible {
         flex-direction: column; /* Stack buttons vertically */
         gap: 1rem; /* Reduce gap */
     }
+    .header {
+        padding: 2.2rem 5%;
+    }
+    section {
+        padding: 10rem 5% 2.5rem;
+    }
 }
 
 /* Text Animation */
@@ -374,7 +390,7 @@ textarea:focus-visible {
 
 /* Heading Styles */
 .heading {
-    font-size: 6rem;
+    font-size: clamp(3.4rem, 7vw, 6rem);
     text-align: center;
     margin: 3rem 0 2rem;
     letter-spacing: 0.05em;
@@ -539,6 +555,8 @@ textarea:focus-visible {
     transition: 0.4s ease-in-out; /* Smooth hover effect */
     display: flex;
     align-items: stretch;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .Skills-box:hover {
@@ -557,6 +575,7 @@ textarea:focus-visible {
     align-items: flex-start; /* Align items to the start */
     padding: 2.2rem; /* Add padding */
     width: 100%;
+    min-width: 0;
 }
 
 .Skills-info h4 {
@@ -577,6 +596,7 @@ textarea:focus-visible {
     line-height: 1.6;
     margin-bottom: 0.8rem;
     color: #d7d7d7;
+    overflow-wrap: anywhere;
 }
 
 .skills-list li:last-child {
@@ -695,19 +715,22 @@ textarea:focus-visible {
 }
 
 .project-filters {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1.2rem;
     margin: 0 auto 4rem;
     padding: 0 2rem;
+    position: -webkit-sticky;
     position: sticky;
     top: 9.5rem;
     z-index: 4;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     background: linear-gradient(180deg, rgba(19, 19, 19, 0.92), rgba(19, 19, 19, 0.72));
     border-radius: 1.6rem;
-    width: fit-content;
+    width: auto;
+    max-width: 100%;
 }
 
 .filter-btn {
@@ -742,6 +765,7 @@ textarea:focus-visible {
     max-width: 1200px; /* Limit container width */
     margin: 0 auto; /* Center container */
     padding: 0 2rem; /* Add padding */
+    min-width: 0;
 }
 
 .project-box {
@@ -756,6 +780,7 @@ textarea:focus-visible {
     transform: scale(1);
     will-change: opacity, transform;
     transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.4s ease;
+    min-width: 0;
 }
 
 .project-box:hover {
@@ -1073,6 +1098,7 @@ margin-top: 2rem;
                         width: 95%; /* Adjust width as needed */
                         padding: 1rem 3%;
                         background: rgba(0, 0, 0, 0.9); /* Dark background */
+                        -webkit-backdrop-filter: blur(20px);
                         backdrop-filter: blur(20px); /* Blur effect */
                         border-bottom-left-radius: 2rem; /* Rounded corners */
                         border-left: 2px solid var(--main-color); /* Accent border */
@@ -1126,6 +1152,7 @@ margin-top: 2rem;
                         grid-template-columns: 1fr;
                     }
                     .project-filters {
+                        display: flex;
                         justify-content: flex-start;
                         width: 100%;
                         top: 8.6rem;
